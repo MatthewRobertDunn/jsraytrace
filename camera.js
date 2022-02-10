@@ -1,4 +1,10 @@
 export default class Camera {
+    up;
+    right;
+    forward;
+    aspectRatio;
+    raysPerUnit;
+    filmDistance;
     constructor({ origin = [0, 0, 0],
         up = [0, 1, 0],
         right = [1, 0, 0],

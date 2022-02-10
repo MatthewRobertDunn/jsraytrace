@@ -1,6 +1,16 @@
+import Material from './material.js';
 import Ray from './ray.js'
 
 export default class Sphere {
+    origin;
+    radius;
+    material;
+    /**
+     * Constructs an instance of the Sphere class
+     * @param {number[]} origin 
+     * @param {number} radius 
+     * @param {Material} material 
+     */
     constructor(origin, radius, material) {
         this.origin = origin;
         this.radius = radius;

@@ -1,4 +1,12 @@
+import RayTracer from "./raytracer";
 export default class Draw {
+    rayTracer;
+    canvas;
+    /**
+     * 
+     * @param {HTMLCanvasElement} canvas 
+     * @param {RayTracer} rayTracer 
+     */
     constructor(canvas, rayTracer) {
         this.rayTracer = rayTracer;
         this.canvas = canvas;
@@ -9,9 +17,7 @@ export default class Draw {
         let ctx = this.canvas.getContext('2d');
         var id = ctx.getImageData(0, 0, width, height);
         var pixels = id.data;
-
         for (let pixel of this.rayTracer.trace()) {
-            let canvasHalfWidth = self.canvas.width
             const x = Math.floor((pixel.coord[0] * width/2) +  width / 2);
             let y = Math.floor((pixel.coord[1] * height/2) + height / 2);
             y = height - y;

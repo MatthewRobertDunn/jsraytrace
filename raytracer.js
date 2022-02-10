@@ -1,6 +1,15 @@
+import Camera from './camera.js';
 import Ray from './ray.js'
-//this is a test
 export default class RayTracer {
+    world;
+    camera;
+    lights;
+    /**
+     * 
+     * @param {Object[]} world 
+     * @param {Camera} camera 
+     * @param {Object[]} lights 
+     */
     constructor(world, camera, lights) {
         this.world = world;
         this.camera = camera;
