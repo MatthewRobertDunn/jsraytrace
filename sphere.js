@@ -25,7 +25,7 @@ export default class Sphere {
         //Solve using quadratic equation
         let a = math.dot(ray.direction, ray.direction); //Not needed if we normalize ray.direction really
         let b = math.dot(ray.direction, o) * 2.0;
-        let c = math.dot(o, o) - math.square(this.radiusSquare);   //todo: calculate r^2 in constructor?
+        let c = math.dot(o, o) - this.radiusSquare;   //todo: calculate r^2 in constructor?
 
         let discriminant = b * b - 4 * a * c;
         if (discriminant < 0) {
@@ -42,7 +42,7 @@ export default class Sphere {
 
         let chosenRoot = root1 > 0 ? root1 : root2;
         let intersect = math.add(ray.origin, math.multiply(ray.direction, chosenRoot));
-        const normal = math.subtract(intersect, this.origin);
+        const normal = math.normalize(math.subtract(intersect, this.origin));
 
         return {
             root1,

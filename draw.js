@@ -1,4 +1,4 @@
-import RayTracer from "./raytracer";
+import RayTracer from "./raytracer.js";
 export default class Draw {
     rayTracer;
     canvas;

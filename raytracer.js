@@ -33,13 +33,33 @@ export default class RayTracer {
         const intersectResult = this._intersectsWorld(ray);
         if (intersectResult) {
             const light = this.lights[0];
-            const lightDirection = math.subtract(light.origin, intersectResult.coord);
-            const lightingAmount = math.dot(math.normalize(lightDirection), math.normalize(intersectResult.normal));
 
-            const lightColor = math.multiply(lightingAmount,light.material.color);
-            return math.dotMultiply(intersectResult.entity.material.color,lightColor);
+            const lightSourceColor = this.shadowRay(intersectResult, light);
+            return math.dotMultiply(intersectResult.entity.material.color, lightSourceColor);
         } else {
             return [0, 0, 0];
+        }
+    }
+
+    /**
+     * Returns the color contribution of a shadow ray from an intersect point to a light
+     * @param {object} intersectResult 
+     * @param {object} light 
+     */
+    shadowRay(intersectResult, light) {
+        //construct a ray going to the light
+        const lightDirection = math.normalize(math.subtract(light.origin, intersectResult.coord));
+        //Create a ray.
+        const lightRay = new Ray(intersectResult.coord, lightDirection);
+        //Check if we hit anything
+        const lightIntersectResult = this._intersectsWorld(lightRay);
+
+        if (lightIntersectResult) {
+            return [0, 0, 0];  //Black, light is blocked
+        } else {
+            //Figure out contribution of this light source to the surface.
+            const lightingAmount = math.dot(lightDirection, intersectResult.normal);
+            return math.multiply(lightingAmount, light.material.color);
         }
     }
 

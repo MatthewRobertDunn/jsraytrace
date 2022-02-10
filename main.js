@@ -13,7 +13,8 @@ export function doSomething(canvas) {
     //sphere at (0,0,3) radius 1, red
     const redSphere = new Sphere([0,0,3],1,{color: [1,0,0]});
     const blueSphere = new Sphere([0,2,3],0.7,{color: [0,0,1]});
-    const world = [redSphere, blueSphere];
+    const groundSphere = new Sphere([0,-100,0],99,{color: [1,1,1]});
+    const world = [redSphere, blueSphere, groundSphere];
 
     const light = new PointLight([1,1,0],{color: [1,1,1]});
     const rayTracer = new RayTracer(world, camera, [light]);

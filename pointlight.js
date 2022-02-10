@@ -1,4 +1,4 @@
-import Material from "./material";
+import Material from "./material.js";
 
 export default class PointLight {
     origin;
