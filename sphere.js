@@ -41,7 +41,7 @@ export default class Sphere {
         }
 
         let chosenRoot = root1 > 0 ? root1 : root2;
-        let intersect = math.add(ray.origin, math.multiply(ray.direction, chosenRoot));
+        let intersect = math.add(ray.origin, math.multiply(ray.direction, chosenRoot*0.99999));
         const normal = math.normalize(math.subtract(intersect, this.origin));
 
         return {
