@@ -29,16 +29,37 @@ export default class RayTracer {
         }
     }
 
-    traceRay(ray) {
+    /**
+     * 
+     * @param {Ray} ray 
+     * @returns 
+     */
+    traceRay(ray, iteration = 0) {
         const intersectResult = this._intersectsWorld(ray);
         if (intersectResult) {
-            const light = this.lights[0];
+            let reflection = intersectResult.entity.material.reflection;
+            const surfaceColor = math.multiply(this.shadowRays(intersectResult), 1.0 - reflection);
+            if(intersectResult.entity.material.reflection > 0 && iteration < 3){
+                const d = ray.direction;
+                const n = intersectResult.normal;
+                const r = math.subtract(d,math.multiply(2,math.multiply(math.dot(d,n),n)));
+                const reflectedRay = new Ray(intersectResult.coord,r);
+                return math.add(surfaceColor, math.multiply(reflection ,this.traceRay(reflectedRay,iteration+1)));
+            } else {
+                return surfaceColor;
+            }
+        } else {
+            return [0.1, 0.1, 0.1];
+        }
+    }
 
+    shadowRays(intersectResult) {
+        const lightColors = this.lights.map(light => {
             const lightSourceColor = this.shadowRay(intersectResult, light);
             return math.dotMultiply(intersectResult.entity.material.color, lightSourceColor);
-        } else {
-            return [0, 0, 0];
-        }
+        });
+
+        return math.add(...lightColors, [0,0,0]);
     }
 
     /**
