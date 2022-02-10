@@ -1,5 +1,5 @@
 import Ray from './ray.js'
-
+//this is a test
 export default class RayTracer {
     constructor(world, camera, lights) {
         this.world = world;
