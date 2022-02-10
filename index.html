@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>nips</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    Please wait <br>
+    <canvas id="canvas" width="480" height="480">
+  </body>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.0.2/math.js"></script>
+<script type="module">
+        import {doSomething} from './main.js'
+
+        math.normalize = (x) => math.divide(x, math.norm(x))
+
+        const canvas = document.getElementById("canvas");       
+        doSomething(canvas);
+    </script>
+</html>
