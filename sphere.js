@@ -32,7 +32,7 @@ export default class Sphere {
             return null;
         }
 
-        discriminant = math.sqrt(discriminant);
+        discriminant = Math.sqrt(discriminant);
 
         let root1 = (-b - discriminant) / (2 * a);
         let root2 = (-b + discriminant) / (2 * a);
@@ -42,7 +42,7 @@ export default class Sphere {
 
         let chosenRoot = root1 > 0 ? root1 : root2;
         let intersect = math.add3(ray.origin, math.multiply3Scalar(ray.direction, chosenRoot*0.99999));
-        const normal = math.normalize(math.subtract3(intersect, this.origin));
+        const normal = math.normalize3(math.subtract3(intersect, this.origin));
 
         return {
             root1,

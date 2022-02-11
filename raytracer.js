@@ -71,7 +71,7 @@ export default class RayTracer {
      */
     shadowRay(intersectResult, light) {
         //construct a ray going to the light
-        const lightDirection = math.normalize(math.subtract(light.origin, intersectResult.coord));
+        const lightDirection = math.normalize3(math.subtract3(light.origin, intersectResult.coord));
         //Create a ray slightly off the surface
         //const surfaceCoord = math.add(intersectResult.coord,math.multiply(intersectResult.normal,Number.MIN_VALUE));
         const surfaceCoord = intersectResult.coord;

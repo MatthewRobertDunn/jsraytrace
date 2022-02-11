@@ -8,6 +8,6 @@ export default class Ray {
      */
     constructor(origin, direction) {
         this.origin = origin;
-        this.direction = math.normalize(direction);
+        this.direction = math.normalize3(direction);
     }
 }
