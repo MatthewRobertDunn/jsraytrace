@@ -17,6 +17,7 @@ export default class RayTracer {
     }
 
     *trace() {
+        this.camera.transformWorld(this.world,this.lights);
         //Iterate through all the points on the film
         for (let filmCoord of this.camera.filmCoords()) {
             //Get our initial ray
@@ -66,6 +67,7 @@ export default class RayTracer {
      * Returns the color contribution of a shadow ray from an intersect point to a light
      * @param {object} intersectResult 
      * @param {object} light 
+     * @returns {Number[]}
      */
     shadowRay(intersectResult, light) {
         //construct a ray going to the light

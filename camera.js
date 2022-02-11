@@ -5,6 +5,7 @@ export default class Camera {
     aspectRatio;
     raysPerUnit;
     filmDistance;
+    viewMatrix;
     constructor({ origin = [0, 0, 0],
         up = [0, 1, 0],
         right = [1, 0, 0],
@@ -25,12 +26,29 @@ export default class Camera {
 
     //Build a view matrix to transform the world.
     createViewMatrix() {
-        let viewMatrix = [this.right, this.up, this.forward, this.origin];
+        //this.viewMatrix = math.matrix([this.right, this.up, this.forward, this.origin]);
+        this.viewMatrix = [
+            [this.right[0], this.up[0], this.forward[0], -this.origin[0]],
+            [this.right[1], this.up[1], this.forward[1], -this.origin[1]],
+            [this.right[2], this.up[2], this.forward[2], -this.origin[2]],
+            [0, 0, 0, 1]
+        ];
+        console.log(this.viewMatrix);
     }
 
     //Transforms the current world so the camera is at 0,0,0 and pointing forward
-    transformWorld(world) {
+    /**
+     * 
+     * @param {object[]} world 
+     * @param {object[]} lights 
+     */
+    transformWorld(world, lights) {
         //todo: transform the world by the viewmatrix
+        for (let entity of world.concat(lights)) {
+            entity.origin.push(1);
+            let o = math.multiply(this.viewMatrix, entity.origin);
+            entity.origin = [o[0], o[1], o[2]];
+        }
     }
 
     //Generator function returns all coordinates on the film

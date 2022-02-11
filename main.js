@@ -8,7 +8,7 @@ import PointLight from './pointlight.js'
 export function doSomething(canvas) {
 
     //default camer at 0,0,0 looking forward.
-    const camera = new Camera({ aspectRatio: 1, raysPerUnit: 480 });
+    const camera = new Camera({origin:[0,0,-1], aspectRatio: 1, raysPerUnit: 480 });
 
     //sphere at (0,0,3) radius 1, red
     const redSphere = new Sphere([0, 0, 3], 1, { color: [1, 0, 0], reflection: 0.0 });
