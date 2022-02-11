@@ -43,7 +43,7 @@ export default class RayTracer {
             if(intersectResult.entity.material.reflection > 0 && iteration < 3){
                 const d = ray.direction;
                 const n = intersectResult.normal;
-                const r = math.subtract3(d,math.multiply(2,math.multiply(math.dot3(d,n),n)));
+                const r = math.subtract3(d,math.multiply3Scalar(math.multiply3Scalar(n,math.dot3(d,n),2)));
                 const reflectedRay = new Ray(intersectResult.coord,r);
                 return math.add3(surfaceColor, math.multiply3Scalar(this.traceRay(reflectedRay,iteration+1),reflection));
             } else {
