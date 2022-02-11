@@ -39,13 +39,13 @@ export default class RayTracer {
         const intersectResult = this._intersectsWorld(ray);
         if (intersectResult) {
             let reflection = intersectResult.entity.material.reflection;
-            const surfaceColor = math.multiply(this.shadowRays(intersectResult), 1.0 - reflection);
+            const surfaceColor = math.multiply3Scalar(this.shadowRays(intersectResult), 1.0 - reflection);
             if(intersectResult.entity.material.reflection > 0 && iteration < 3){
                 const d = ray.direction;
                 const n = intersectResult.normal;
-                const r = math.subtract(d,math.multiply(2,math.multiply(math.dot(d,n),n)));
+                const r = math.subtract3(d,math.multiply(2,math.multiply(math.dot3(d,n),n)));
                 const reflectedRay = new Ray(intersectResult.coord,r);
-                return math.add(surfaceColor, math.multiply(reflection ,this.traceRay(reflectedRay,iteration+1)));
+                return math.add3(surfaceColor, math.multiply3Scalar(this.traceRay(reflectedRay,iteration+1),reflection));
             } else {
                 return surfaceColor;
             }
