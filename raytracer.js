@@ -57,7 +57,7 @@ export default class RayTracer {
     shadowRays(intersectResult) {
         const lightColors = this.lights.map(light => {
             const lightSourceColor = this.shadowRay(intersectResult, light);
-            return math.dotMultiply(intersectResult.entity.material.color, lightSourceColor);
+            return math.dotMultiply3(intersectResult.entity.material.color, lightSourceColor);
         });
 
         return math.add(...lightColors, [0,0,0]);
@@ -85,8 +85,8 @@ export default class RayTracer {
             return [0, 0, 0];  //Black, light is blocked
         } else {
             //Figure out contribution of this light source to the surface.
-            const lightingAmount = math.dot(lightDirection, intersectResult.normal);
-            return math.multiply(lightingAmount, light.material.color);
+            const lightingAmount = math.dot3(lightDirection, intersectResult.normal);
+            return math.multiply3Scalar(light.material.color, lightingAmount);
         }
     }
 
