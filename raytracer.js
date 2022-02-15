@@ -60,7 +60,7 @@ export default class RayTracer {
             return math.dotMultiply3(intersectResult.entity.material.color, lightSourceColor);
         });
 
-        return math.add(...lightColors, [0,0,0]);
+        return lightColors.reduce((a,b) => math.add3(a,b));
     }
 
     /**

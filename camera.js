@@ -12,7 +12,7 @@ export default class Camera {
         forward = [0, 0, 1],
         aspectRatio = 1.0,
         raysPerUnit = 200,
-        filmDistance = 1.0 }) {
+        filmDistance = 4.0 }) {
 
         this.origin = origin;
         this.up = up;
@@ -50,6 +50,7 @@ export default class Camera {
             entity.origin = [o[0], o[1], o[2]];
         }
     }
+    
 
     //Generator function returns all coordinates on the film
     //aspectRataio, eg, 16:9 for widescreen

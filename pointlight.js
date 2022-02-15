@@ -4,7 +4,7 @@ export default class PointLight {
     origin;
     material;
     /**
-     * 
+     * Represents a single point isotropic source
      * @param {number[]} origin 
      * @param {Material} material 
      */

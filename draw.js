@@ -3,7 +3,7 @@ export default class Draw {
     rayTracer;
     canvas;
     /**
-     * 
+     * Constructs a new instance of the RayTracer class
      * @param {HTMLCanvasElement} canvas 
      * @param {RayTracer} rayTracer 
      */
